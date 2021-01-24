@@ -1,7 +1,6 @@
 local Windows = GameMain:GetMod("Windows");
 local RubberSpree_Window = Windows:CreateWindow("RubberSpree_Window");
-local MinMind = 55;
-local MaxMind = 90;
+
 
 function RubberSpree_Window:OnInit()
 	self.window.contentPane =  UIPackage.CreateObject("RubberSpree", "RubberSpreeWindow");
@@ -33,11 +32,20 @@ end
 function OnClick(context)
 	print('you click',context)
 	world:ShowMsgBox(context.sender.name.." Clicked","onClick");
+	PracticeModeGaiBian(1111);
 end
 
 function OnChanged(context)
 	print('you change',context)
 	world:ShowMsgBox(context.sender.name.." change","onChanged");
+
+end
+
+--PracticeModeGaiBian(11111);
+function PracticeModeGaiBian(param)
+	local MinMind = 56;
+	local MaxMind = 90;
+	
 	local NpcList = Map.Things:GetPlayerActiveNpcs(g_emNpcRaceType.Wisdom);
     for _, Npc in pairs(NpcList) do
         if Npc.CanDoAction and Npc.Rank == g_emNpcRank.Disciple then    --只筛选内门，且可行动的人。
@@ -47,17 +55,18 @@ function OnChanged(context)
 			print('MindState is too low');
 			local Job = Npc.JobEngine.CurJob; -- 取NPC当前工作
 			local JobType = nil;
-						if Job ~= nil and Job.jobdef ~= nil then
-							JobType = Job.jobdef.Name
-						end
-						if JobType == "JobPractice" then	-- 如果还在修行状态，则打断当前任务
-							Job:InterruptJob()
-						end
-						local NpcPracticeMode = Npc.PropertyMgr.Practice.PracticeMode;   --获取当前修炼模式。
-						print(NpcPracticeMode);
-						if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet then	-- 如果不在调心模式，则切换到调心模式
-						   ChangePracticeMode(Npc, "tiaoxin")
-						end
+			if Job ~= nil and Job.jobdef ~= nil then
+				JobType = Job.jobdef.Name
+			end
+			print(JobType);
+			if JobType == "JobPractice" or JobType == 'JobPracticeSkill' then	-- 如果还在修行/练习状态，则打断当前任务
+				Job:InterruptJob()
+			end
+			local NpcPracticeMode = Npc.PropertyMgr.Practice.PracticeMode;   --获取当前修炼模式。
+			print(NpcPracticeMode);
+			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet then	-- 如果不在调心模式，则切换到调心模式
+			   ChangePracticeMode(Npc, "tiaoxin")
+			end
 		  end
 
 		  print(name);
