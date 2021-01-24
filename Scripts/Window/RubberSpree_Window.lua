@@ -65,7 +65,15 @@ function PracticeModeGaiBian(param)
 			local NpcPracticeMode = Npc.PropertyMgr.Practice.PracticeMode;   --获取当前修炼模式。
 			print(NpcPracticeMode);
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet then	-- 如果不在调心模式，则切换到调心模式
-			   ChangePracticeMode(Npc, "tiaoxin")
+			   ChangePracticeMode(Npc, "tiaoxin");
+			end
+		  elseif MindState >= MaxMind then	-- 心境高于设定
+			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice or NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then	-- 如果不在修行/练习模式，则切换到修行模式
+				ChangePracticeMode(Npc, "xiulian");
+			end
+		  else	-- 如果心境值处于区间段，但既不在修行/练习，也不在调心，则切换到调心模式。
+			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice and  NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then
+			   ChangePracticeMode(Npc, "tiaoxin");
 			end
 		  end
 
