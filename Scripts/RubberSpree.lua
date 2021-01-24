@@ -1,9 +1,7 @@
 local RubberSpree = GameMain:NewMod("RubberSpree");--先注册一个新的MOD模块
 
 function RubberSpree:OnInit()
-	print("Example init");
-	local RSwindow = self:GetRSWindow();
-	RSwindow:SetMindValue(50, 80);
+	print("RubberSpree Initlized");
 end
 
 function RubberSpree:OnSetHotKey()
@@ -25,11 +23,8 @@ function RubberSpree:OnHotKey(ID,state)
 	--ID为快捷键注册时的编码，系统识别快捷键的唯一标识
 	--state为快捷键当前操作状态，按下"down"，持续"stay"，离开"up"
 	if ID == "RubberSpree" and state == "down" then 
-       print("=========== Test is down ====！！！====="); --在ID和state都对应的情况下，会执行此部分逻辑
+	   print("=========== Test is down ============="); --在ID和state都对应的情况下，会执行此部分逻辑
+	   GameMain:GetMod("Windows"):GetWindow("RubberSpree_Window"):Show();
     end	   
 	
-end
-
-function RubberSpree:GetRSWindow()
-	return GameMain:GetMod("Windows"):GetWindow("RubberSpree_window");
 end
