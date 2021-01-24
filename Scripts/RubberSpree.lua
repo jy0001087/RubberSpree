@@ -23,7 +23,6 @@ function RubberSpree:OnHotKey(ID,state)
 	--ID为快捷键注册时的编码，系统识别快捷键的唯一标识
 	--state为快捷键当前操作状态，按下"down"，持续"stay"，离开"up"
 	if ID == "RubberSpree" and state == "down" then 
-	   print("=========== Test is down ============="); --在ID和state都对应的情况下，会执行此部分逻辑
 	   GameMain:GetMod("Windows"):GetWindow("RubberSpree_Window"):Show();
     end	   
 	
