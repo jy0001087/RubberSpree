@@ -1,0 +1,12 @@
+﻿{
+	"Name":"RubberSpree",		
+	"DisplayName":"NastyTools", 
+	"Desc":"简单工具合集",
+	"UIPackage":"UI/RubberSpree", 
+	"UIPackage说明":"载入UI模块，多个包用逗号隔开，没有就删掉UIPackage",
+	"GameVersion":0.95,	
+	"Version":0.11,			
+	"Author":"RubberSpree",			
+	"Sort":"99999",		
+	"IncreasedDesc":"RubberSpree专用Mods。\nThis mod is for RubberSpree only."	
+}
