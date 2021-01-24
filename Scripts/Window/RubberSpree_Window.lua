@@ -43,7 +43,7 @@ end
 
 --PracticeModeGaiBian(11111);
 function PracticeModeGaiBian(param)
-	local MinMind = 56;
+	local MinMind = 50;
 	local MaxMind = 90;
 	
 	local NpcList = Map.Things:GetPlayerActiveNpcs(g_emNpcRaceType.Wisdom);
@@ -51,6 +51,8 @@ function PracticeModeGaiBian(param)
         if Npc.CanDoAction and Npc.Rank == g_emNpcRank.Disciple then    --只筛选内门，且可行动的人。
 		  local name = Npc.Name;
 		  local MindState = Npc.Needs:GetNeedValue("MindState")     --获取当前心境数值。
+		  local NpcPracticeMode = Npc.PropertyMgr.Practice.PracticeMode;   --获取当前修炼模式。
+		  print(NpcPracticeMode);
 		  if MindState <= MinMind then
 			print('MindState is too low');
 			local Job = Npc.JobEngine.CurJob; -- 取NPC当前工作
@@ -62,17 +64,17 @@ function PracticeModeGaiBian(param)
 			if JobType == "JobPractice" or JobType == 'JobPracticeSkill' then	-- 如果还在修行/练习状态，则打断当前任务
 				Job:InterruptJob()
 			end
-			local NpcPracticeMode = Npc.PropertyMgr.Practice.PracticeMode;   --获取当前修炼模式。
-			print(NpcPracticeMode);
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet then	-- 如果不在调心模式，则切换到调心模式
 			   ChangePracticeMode(Npc, "tiaoxin");
 			end
 		  elseif MindState >= MaxMind then	-- 心境高于设定
+			print('Enter HighMind satuation')
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice or NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then	-- 如果不在修行/练习模式，则切换到修行模式
 				ChangePracticeMode(Npc, "xiulian");
 			end
 		  else	-- 如果心境值处于区间段，但既不在修行/练习，也不在调心，则切换到调心模式。
-			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice and  NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then
+			print('Enter between satuation')
+			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then
 			   ChangePracticeMode(Npc, "tiaoxin");
 			end
 		  end
