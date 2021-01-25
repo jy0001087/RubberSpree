@@ -29,20 +29,20 @@ function RubberSpree_Window:OnHide()
 
 end
 
-function OnClick(context)
+function RubberSpree_Window:OnClick(context)
 	print('you click',context)
 	world:ShowMsgBox(context.sender.name.." Clicked","onClick");
 	PracticeModeGaiBian(1111);
 end
 
-function OnChanged(context)
+function RubberSpree_Window:OnChanged(context)
 	print('you change',context)
 	world:ShowMsgBox(context.sender.name.." change","onChanged");
 
 end
 
 --PracticeModeGaiBian(11111);
-function PracticeModeGaiBian(param)
+function RubberSpree_Window:PracticeModeGaiBian(param)
 	local MinMind = 50;
 	local MaxMind = 90;
 	
@@ -85,7 +85,7 @@ function PracticeModeGaiBian(param)
     end
 end
 
-function ChangePracticeMode(Npc, PracticeMode)	-- 更改NPC行为模式
+function RubberSpree_Window:ChangePracticeMode(Npc, PracticeMode)	-- 更改NPC行为模式
 	local NpcPracticeMode = Npc.PropertyMgr.Practice
 		if PracticeMode == "xiulian" then
 			NpcPracticeMode:ChangeMode(CS.XiaWorld.g_emPracticeBehaviourKind.Practice)	-- 修行模式
@@ -94,4 +94,8 @@ function ChangePracticeMode(Npc, PracticeMode)	-- 更改NPC行为模式
 		elseif PracticeMode == "tiaoxin" then
 			NpcPracticeMode:ChangeMode(CS.XiaWorld.g_emPracticeBehaviourKind.Quiet)	-- 调心模式
 		end
+end
+
+function RubberSpree_Window:ClickTest(parm)
+    print("hello   ");
 end

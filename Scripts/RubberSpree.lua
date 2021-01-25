@@ -1,7 +1,10 @@
 local RubberSpree = GameMain:NewMod("RubberSpree");--先注册一个新的MOD模块
+local count = 0;
+
 
 function RubberSpree:OnInit()
 	print("RubberSpree Initlized");
+	local RubberSpreeWindow = self:GetRubberSpreeWindow();
 end
 
 function RubberSpree:OnSetHotKey()
@@ -19,11 +22,25 @@ function RubberSpree:OnSetHotKey()
 end
 
 function RubberSpree:OnHotKey(ID,state)
-     
+	local RubberSpreeWindow = self:GetRubberSpreeWindow();
 	--ID为快捷键注册时的编码，系统识别快捷键的唯一标识
 	--state为快捷键当前操作状态，按下"down"，持续"stay"，离开"up"
 	if ID == "RubberSpree" and state == "down" then 
-	   GameMain:GetMod("Windows"):GetWindow("RubberSpree_Window"):Show();
+		RubberSpreeWindow:Show();
     end	   
 	
+end
+
+function RubberSpree:onStep(dt)
+	local RubberSpreeWindow = self:GetRubberSpreeWindow();
+	count = count + 1
+	if count > 1 then
+		RubberSpreeWindow:Show();
+		RubberSpreeWindow:ClickTest("Hello~");
+		count = 0;
+	end
+end
+
+function RubberSpree:GetRubberSpreeWindow()
+	return GameMain:GetMod("Windows"):GetWindow("RubberSpree_Window");
 end
