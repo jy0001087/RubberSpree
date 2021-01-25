@@ -31,12 +31,12 @@ function RubberSpree:OnHotKey(ID,state)
 	
 end
 
-function RubberSpree:onStep(dt)
+function RubberSpree:OnStep(dt)
 	local RubberSpreeWindow = self:GetRubberSpreeWindow();
 	count = count + 1
-	if count > 1 then
-		RubberSpreeWindow:Show();
-		RubberSpreeWindow:ClickTest("Hello~");
+	if count > 2000 then   --现实时间大约1分钟
+		RubberSpreeWindow:ClickTest("Hello~OnInit");
+		RubberSpreeWindow:PracticeModeGaiBian("start");
 		count = 0;
 	end
 end

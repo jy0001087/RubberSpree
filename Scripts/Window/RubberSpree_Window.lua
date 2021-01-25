@@ -65,17 +65,17 @@ function RubberSpree_Window:PracticeModeGaiBian(param)
 				Job:InterruptJob()
 			end
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet then	-- 如果不在调心模式，则切换到调心模式
-			   ChangePracticeMode(Npc, "tiaoxin");
+			   self:ChangePracticeMode(Npc, "tiaoxin");
 			end
 		  elseif MindState >= MaxMind then	-- 心境高于设定
 			print('Enter HighMind satuation')
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice or NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then	-- 如果不在修行/练习模式，则切换到修行模式
-				ChangePracticeMode(Npc, "xiulian");
+				self:ChangePracticeMode(Npc, "xiulian");
 			end
 		  else	-- 如果心境值处于区间段，但既不在修行/练习，也不在调心，则切换到调心模式。
 			print('Enter between satuation')
 			if NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Practice and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Quiet and NpcPracticeMode ~= CS.XiaWorld.g_emPracticeBehaviourKind.Skill then
-			   ChangePracticeMode(Npc, "tiaoxin");
+				self:ChangePracticeMode(Npc, "tiaoxin");
 			end
 		  end
 
