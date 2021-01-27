@@ -31,11 +31,13 @@ function RubberSpree:OnHotKey(ID,state)
 	
 end
 
+
+--逻辑帧循环调用任务
 function RubberSpree:OnStep(dt)
 	local RubberSpreeWindow = self:GetRubberSpreeWindow();
 	count = count + 1
 	if count > 2000 then   --现实时间大约1分钟
-		RubberSpreeWindow:ClickTest("Hello~OnInit");
+		--RubberSpreeWindow:ClickTest("Hello~OnInit");
 		RubberSpreeWindow:PracticeModeGaiBian("start");
 		count = 0;
 	end

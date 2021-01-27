@@ -96,6 +96,6 @@ function RubberSpree_Window:ChangePracticeMode(Npc, PracticeMode)	-- 更改NPC�
 		end
 end
 
-function RubberSpree_Window:ClickTest(parm)
+function RubberSpree_Window:MedicineIntakeRegulation(parm)
     print("hello   ");
 end
