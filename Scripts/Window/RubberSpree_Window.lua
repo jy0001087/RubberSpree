@@ -96,6 +96,45 @@ function RubberSpree_Window:ChangePracticeMode(Npc, PracticeMode)	-- 更改NPC�
 		end
 end
 
-function RubberSpree_Window:MedicineIntakeRegulation(parm)
-    print("hello   ");
+function RubberSpree_Window:MedicineIntakeRegulation(parm)     --内门药物控制
+	local NpcList = Map.Things:GetPlayerActiveNpcs(g_emNpcRaceType.Wisdom);
+	print("MedicineIntakeRegulation is active  now  ");
+    for _, Npc in pairs(NpcList) do
+        if Npc.CanDoAction and Npc.Rank == g_emNpcRank.Disciple then    --只筛选内门，且可行动的人。
+			if Npc.CanDoAction then
+						self:MedicineTake(Npc, "qingxin");
+						self:MedicineTake(Npc, "jingyuan");
+						self:MedicineTake(Npc, "huangya");
+						self:medicineTake(Npc, "jingyuanzhibu");
+			end
+		end
+	end
+end
+
+function RubberSpree_Window:MedicineTake(Npc, Buff)	-- 添加NPC吃药行为
+	local BuffName
+	local ItemName
+	if Buff == "qingxin" then
+		 BuffName = "Dan_CalmDown"
+		 ItemName = "Item_Dan_CalmDown"
+	elseif Buff == "jingyuan" then
+		 BuffName = "Dan_JingYuan3"
+		 ItemName = "Item_Dan_JingYuan3"
+	elseif Buff == "huangya" then
+		 BuffName = "Dan_PracticeSpeed"
+		 ItemName = "Item_Dan_PracticeSpeed"
+	elseif Buff == "jingyuanzhibu" then
+		 --BuffName = "Dan_PracticeSpeed"
+		 --ItemName = "Item_Dan_PracticeSpeed"
+		 --local prac = Npc.PracticeNutrition;
+		 --print(prac);
+	else
+		return
+	end
+	if Npc.PropertyMgr:FindModifier(BuffName) == nil then
+		local Item = Map.Things:FindItem(null, 9999, ItemName, 0, false, null, 0, 9999, null, false)
+		if Item ~= nil then
+			Npc:AddCommandIfNotExist("EatItem",Item)
+		end
+	end
 end

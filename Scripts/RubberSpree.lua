@@ -38,7 +38,8 @@ function RubberSpree:OnStep(dt)
 	count = count + 1
 	if count > 2000 then   --现实时间大约1分钟
 		--RubberSpreeWindow:ClickTest("Hello~OnInit");
-		RubberSpreeWindow:PracticeModeGaiBian("start");
+		RubberSpreeWindow:PracticeModeGaiBian("start");   
+		RubberSpreeWindow:MedicineIntakeRegulation("start");
 		count = 0;
 	end
 end
