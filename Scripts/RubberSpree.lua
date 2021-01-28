@@ -36,11 +36,11 @@ end
 function RubberSpree:OnStep(dt)
 	local RubberSpreeWindow = self:GetRubberSpreeWindow();
 	count = count + 1
-	if count > 2000 then   --现实时间大约1分钟
+	if count > 1000 then   --现实时间大约1分钟
 		--RubberSpreeWindow:ClickTest("Hello~OnInit");
 		RubberSpreeWindow:PracticeModeGaiBian("start");   
 		RubberSpreeWindow:MedicineIntakeRegulation("start");
-		RubberSpreeWindow:FoodMaintain("start");
+	--	RubberSpreeWindow:FoodMaintain("start");
 		count = 0;
 	end
 end

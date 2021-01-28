@@ -105,7 +105,7 @@ function RubberSpree_Window:MedicineIntakeRegulation(parm)     --内门药物控
 						self:MedicineTake(Npc, "qingxin");
 						self:MedicineTake(Npc, "jingyuan");
 						self:MedicineTake(Npc, "huangya");
-						self:medicineTake(Npc, "jingyuanzhibu");
+						self:MedicineTake(Npc, "jingyuanzhibu");
 			end
 		end
 	end
@@ -126,11 +126,11 @@ function RubberSpree_Window:MedicineTake(Npc, Buff)	-- 添加NPC吃药行为
 	elseif Buff == "jingyuanzhibu" then
 		 local PracticeNutrition =  Npc.Needs:GetNeedValue("Practice");     --获取当前精元数值(参数值参见 g_emNeedType --API)。
 		 print(PracticeNutrition);
-		 if PracticeNutrition < 50 then    --精元值小于50 吃精元大补丹
-			BuffName = "￥";
-			ItemName = "￥";                                
-	     end
-		 --PracticeNutrition addition process logic;
+		 if PracticeNutrition < 500 then    --精元值小于50 吃精元大补丹
+			BuffName = "jingyuanzhibu";
+			ItemName = "Item_LingMuXueJie";                                
+		 end
+-- elseif Item_DelicacyFood	  炉灶 Kitchen
 	else
 		return
 	end
