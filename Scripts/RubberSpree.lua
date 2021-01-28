@@ -40,6 +40,7 @@ function RubberSpree:OnStep(dt)
 		--RubberSpreeWindow:ClickTest("Hello~OnInit");
 		RubberSpreeWindow:PracticeModeGaiBian("start");   
 		RubberSpreeWindow:MedicineIntakeRegulation("start");
+		RubberSpreeWindow:FoodMaintain("start");
 		count = 0;
 	end
 end

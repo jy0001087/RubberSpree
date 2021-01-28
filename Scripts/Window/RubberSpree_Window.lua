@@ -124,10 +124,13 @@ function RubberSpree_Window:MedicineTake(Npc, Buff)	-- 添加NPC吃药行为
 		 BuffName = "Dan_PracticeSpeed"
 		 ItemName = "Item_Dan_PracticeSpeed"
 	elseif Buff == "jingyuanzhibu" then
-		 --BuffName = "Dan_PracticeSpeed"
-		 --ItemName = "Item_Dan_PracticeSpeed"
-		 --local prac = Npc.PracticeNutrition;
-		 --print(prac);
+		 local PracticeNutrition =  Npc.Needs:GetNeedValue("Practice");     --获取当前精元数值(参数值参见 g_emNeedType --API)。
+		 print(PracticeNutrition);
+		 if PracticeNutrition < 50 then    --精元值小于50 吃精元大补丹
+			BuffName = "￥";
+			ItemName = "￥";                                
+	     end
+		 --PracticeNutrition addition process logic;
 	else
 		return
 	end
@@ -136,5 +139,13 @@ function RubberSpree_Window:MedicineTake(Npc, Buff)	-- 添加NPC吃药行为
 		if Item ~= nil then
 			Npc:AddCommandIfNotExist("EatItem",Item)
 		end
+	end
+end
+
+function RubberSpree_Window:FoodMaintain(parm)
+	local FoodName = "￥";
+	local Item = Map.Things:FindItem(null, 9999, FoodName, 0, false, null, 0, 9999, null, false);
+	if Item < 20 then
+		--向灶台下达做饭指令。
 	end
 end
