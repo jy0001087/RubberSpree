@@ -106,6 +106,7 @@ function RubberSpree_Window:MedicineIntakeRegulation(parm)     --内门药物控
 						self:MedicineTake(Npc, "jingyuan");
 						self:MedicineTake(Npc, "huangya");
 						self:MedicineTake(Npc, "jingyuanzhibu");
+						self:MedicineTake(Npc, "eatDelicacyFood");
 			end
 		end
 	end
@@ -130,7 +131,13 @@ function RubberSpree_Window:MedicineTake(Npc, Buff)	-- 添加NPC吃药行为
 			BuffName = "jingyuanzhibu";
 			ItemName = "Item_LingMuXueJie";                                
 		 end
--- elseif Item_DelicacyFood	  炉灶 Kitchen
+	elseif Buff == "eatDelicacyFood" then
+		local FoodNeed =  Npc.Needs:GetNeedValue("Food");     --获取当前饮食数值(参数值参见 g_emNeedType --API)。
+		print(FoodNeed);
+		if FoodNeed < 50 then    --精元值小于50 吃精元大补丹
+	   		BuffName = "eatDelicacyFood";
+	   		ItemName = "Item_DelicacyFood";                                
+		end
 	else
 		return
 	end
@@ -147,5 +154,6 @@ function RubberSpree_Window:FoodMaintain(parm)
 	local Item = Map.Things:FindItem(null, 9999, FoodName, 0, false, null, 0, 9999, null, false);
 	if Item < 20 then
 		--向灶台下达做饭指令。
+		-- 炉灶 Kitchen
 	end
 end
